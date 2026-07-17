@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قناتي على يوتيوب</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #00ffff;
+        }
+        a.subscribe {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #00ffff;
+            color: #121212;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        a.subscribe:hover {
+            background-color: #009999;
+            color: #ffffff;
+        }
+        .lang-btn {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+        }
+        .lang-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">مرحبًا بكم في موقعي الرسمي</h1>
+    <p id="desc">اضغط على الزر للاشتراك في قناتي على يوتيوب</p>
+    <a class="subscribe" href="https://youtube.com/@abdullahabod710?si=pmiFa3GO04S_IIFB" target="_blank">اشترك الآن</a>
+    
+    <div>
+        <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+        <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            if(lang === 'ar') {
+                document.getElementById('title').innerText = "مرحبًا بكم في موقعي الرسمي";
+                document.getElementById('desc').innerText = "اضغط على الزر للاشتراك في قناتي على يوتيوب";
+                document.querySelector('.subscribe').innerText = "اشترك الآن";
+            } else {
+                document.getElementById('title').innerText = "Welcome to my official site";
+                document.getElementById('desc').innerText = "Click the button to subscribe to my YouTube channel";
+                document.querySelector('.subscribe').innerText = "Subscribe Now";
+            }
+        }
+    </script>
+</body>
+</html>
