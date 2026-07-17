@@ -167,8 +167,8 @@
       border: 1px solid var(--accent-color);
     }
 
-    /* شارة مخصصة مميزة لـ PPSSPP */
-    .game-card.ppsspp .platform-badge {
+    /* شارة مخصصة مميزة لـ PSP */
+    .game-card.psp .platform-badge {
       background: rgba(37, 99, 235, 0.2);
       color: #3b82f6;
       border-color: #3b82f6;
@@ -210,14 +210,14 @@
     اشترك في قناتي
   </a>
 
-  <!-- أزرار الأقسام بعد إضافة PPSSPP -->
+  <!-- أزرار الأقسام بعد الاختصار إلى PSP -->
   <div class="filter-container">
     <button class="filter-btn active" onclick="filterGames('all')" id="btn-all">كل الألعاب</button>
     <button class="filter-btn" onclick="filterGames('pc')" id="btn-pc">PC</button>
     <button class="filter-btn" onclick="filterGames('ps2')" id="btn-ps2">PS2</button>
     <button class="filter-btn" onclick="filterGames('ps3')" id="btn-ps3">PS3</button>
     <button class="filter-btn" onclick="filterGames('ps4')" id="btn-ps4">PS4</button>
-    <button class="filter-btn" onclick="filterGames('ppsspp')" id="btn-ppsspp">PPSSPP</button>
+    <button class="filter-btn" onclick="filterGames('psp')" id="btn-psp">PSP</button>
   </div>
 
   <!-- شريط البحث -->
@@ -247,11 +247,10 @@
       </a>
     </div>
 
-    <!-- قالب جاهز لإضافة أول لعبة PPSSPP مستقبلاً -->
-    <!-- يمكنك إزالة التعليق أدناه لتفعيل كارت تجريبي في قسم PPSSPP -->
+    <!-- قالب جاهز لإضافة أول لعبة PSP مستقبلاً -->
     <!--
-    <div class="game-card ppsspp">
-      <div class="platform-badge">PPSSPP</div>
+    <div class="game-card psp">
+      <div class="platform-badge">PSP</div>
       <img src="اسم_الصورة.png" alt="Game">
       <h3 class="game-title">اسم لعبة PSP هنا</h3>
       <a href="رابط_التحميل" class="download-btn" target="_blank">تنزيل اللعبة</a>
@@ -260,7 +259,7 @@
 
   </div>
 
-  <script {STRICT_COMPLETION}>
+  <script>
     let currentCategory = 'all';
 
     function filterGames(category) {
@@ -325,4 +324,3 @@
   </script>
 </body>
 </html>
-
