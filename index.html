@@ -1,151 +1,140 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موقعي الشخصي</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+      --text-main: #ffffff;
+      --accent-color: #00f0ff;
+      --card-bg: rgba(30, 41, 59, 0.8);
+    }
+
+    .light-theme {
+      --bg-gradient: #ffffff;
+      --text-main: #000000;
+      --card-bg: #f1f5f9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s; }
+
     body {
-      margin: 0;
       font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #0a0f1a, #1b2735, #2c3e50);
-      color: #ffffff;
-      text-align: center;
-      padding: 50px;
-      transition: 0.5s;
-      font-size: 20px;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      padding: 40px 20px;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    h1 {
-      color: #00bcd4;
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #b0bec5;
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-
-    a.subscribe {
-      display: inline-block;
-      padding: 18px 40px;
-      background-color: #00bcd4;
-      color: #000;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-
-    a.subscribe:hover {
-      box-shadow: 0 0 25px #00bcd4;
-      transform: scale(1.05);
-    }
-
-    h2 {
-      margin-top: 60px;
-      color: #00bcd4;
-      font-size: 28px;
-    }
-
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      justify-items: center;
-      margin-top: 30px;
-    }
-
-    .games a {
-      text-decoration: none;
-      color: #fff;
-      transition: 0.3s;
-    }
-
-    .games img {
+    /* أزرار التحكم العلوي */
+    .top-controls { margin-bottom: 50px; display: flex; gap: 15px; }
+    .top-controls button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
       border-radius: 12px;
-      width: 260px;
-      transition: 0.3s;
-    }
-
-    .games img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #00bcd4;
-    }
-
-    .games p {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #00bcd4;
-      font-size: 18px;
-    }
-
-    .lang-btn, .theme-btn {
-      background-color: #00bcd4;
-      color: #000;
       border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 6px;
-      font-weight: bold;
+      background: var(--card-bg);
+      color: var(--text-main);
       cursor: pointer;
-      transition: 0.3s;
+      font-weight: bold;
     }
 
-    .lang-btn:hover, .theme-btn:hover {
-      box-shadow: 0 0 15px #00bcd4;
+    /* العنوان والنص */
+    h1 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 20px; font-weight: 900; }
+    p { font-size: 1.8rem; margin-bottom: 40px; }
+
+    /* زر الاشتراك الضخم */
+    .subscribe-btn {
+      display: inline-block;
+      padding: 25px 60px;
+      background: var(--accent-color);
+      color: #000;
+      font-size: 2rem;
+      font-weight: 900;
+      text-decoration: none;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+      margin-bottom: 80px;
+    }
+    .subscribe-btn:hover { transform: scale(1.05); }
+
+    /* قسم الألعاب */
+    h2 { font-size: 2.8rem; margin-bottom: 50px; color: var(--accent-color); }
+    .games-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 50px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .game-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 25px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .game-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    .game-card h3 {
+      font-size: 1.8rem;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <div>
-    <button onclick="setLang('ar')" class="lang-btn">العربية</button>
-    <button onclick="setLang('en')" class="lang-btn">English</button>
+
+  <div class="top-controls">
+    <button onclick="setLang('ar')">العربية</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="toggleTheme()">🌓</button>
   </div>
 
-  <h1>مرحبًا بكم في موقعي الشخصي</h1>
-  <p>هنا تجد روابط قناتي وألعابي المفضلة.</p>
-  <a href="https://youtube.com/@abdullahabod710?si=pmiFa3GO04S_IIFB" class="subscribe" target="_blank">اشترك في قناتي</a>
+  <h1 id="title">مرحبًا بكم في موقعي</h1>
+  <p id="desc">هنا تجد قناتي وألعابي المفضلة.</p>
+  
+  <a href="https://youtube.com/@abdullahabod710?si=pmiFa3GO04S_IIFB" class="subscribe-btn" id="sub-btn" target="_blank">
+    اشترك في قناتي
+  </a>
 
-  <h2>🎮 ألعاب المشتركين</h2>
-  <div class="games">
-    <a href="https://romsfun.com/download/dragon-ball-raging-blast-2-1-35119/2" target="_blank">
-      <img src="Dragon-Ball-Raging-Blast-2-ps3.png" alt="Dragon Ball Raging Blast 2">
-      <p>Dragon Ball Raging Blast 2</p>
+  <h2 id="games-title">🎮 ألعاب المشتركين</h2>
+
+  <div class="games-container">
+    <a href="https://romsfun.com/download/dragon-ball-raging-blast-2-1-35119/2" class="game-card" target="_blank">
+      <img src="Dragon-Ball-Raging-Blast-2-ps3.png" alt="Game">
+      <h3>Dragon Ball Raging Blast 2</h3>
     </a>
   </div>
-
-  <button onclick="toggleTheme()" class="theme-btn">تبديل الوضع</button>
 
   <script>
     function setLang(lang) {
       if(lang === 'ar') {
-        document.querySelector('h1').innerText = "مرحبًا بكم في موقعي الشخصي";
-        document.querySelector('p').innerText = "هنا تجد روابط قناتي وألعابي المفضلة.";
-        document.querySelector('.subscribe').innerText = "اشترك في قناتي";
-        document.querySelector('h2').innerText = "🎮 ألعاب المشتركين";
-        document.querySelector('.theme-btn').innerText = "تبديل الوضع";
+        document.getElementById('title').innerText = "مرحبًا بكم في موقعي";
+        document.getElementById('desc').innerText = "هنا تجد قناتي وألعابي المفضلة.";
+        document.getElementById('sub-btn').innerText = "اشترك في قناتي";
+        document.getElementById('games-title').innerText = "🎮 ألعاب المشتركين";
       } else {
-        document.querySelector('h1').innerText = "Welcome to my personal site";
-        document.querySelector('p').innerText = "Here you can find my channel and favorite games.";
-        document.querySelector('.subscribe').innerText = "Subscribe to my channel";
-        document.querySelector('h2').innerText = "🎮 Subscribers' Games";
-        document.querySelector('.theme-btn').innerText = "Toggle Theme";
+        document.getElementById('title').innerText = "Welcome to my site";
+        document.getElementById('desc').innerText = "Find my channel and favorite games here.";
+        document.getElementById('sub-btn').innerText = "Subscribe Now";
+        document.getElementById('games-title').innerText = "🎮 Subscribers' Games";
       }
     }
 
     function toggleTheme() {
-      const body = document.body;
-      if(body.style.background.includes('linear-gradient')) {
-        body.style.background = '#ffffff';
-        body.style.color = '#000000';
-      } else {
-        body.style.background = 'linear-gradient(135deg, #0a0f1a, #1b2735, #2c3e50)';
-        body.style.color = '#ffffff';
-      }
+      document.body.classList.toggle('light-theme');
     }
   </script>
 </body>
