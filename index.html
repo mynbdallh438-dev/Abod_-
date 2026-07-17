@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* خلفية داكنة مريحة وعميقة */
       --bg-gradient: linear-gradient(135deg, #0f172a 0%, #111827 50%, #1e293b 100%);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -16,7 +15,6 @@
     }
 
     .light-theme {
-      /* خلفية فاتحة ناعمة (ليست بيضاء فاقعة) لحماية العين */
       --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
       --text-main: #0f172a;
       --text-muted: #475569;
@@ -28,7 +26,7 @@
     body {
       font-family: 'Tajawal', sans-serif;
       background: var(--bg-gradient);
-      background-attachment: fixed; /* تجعل الخلفية ثابتة ومريحة أثناء التمرير */
+      background-attachment: fixed;
       color: var(--text-main);
       padding: 30px 20px;
       line-height: 1.6;
@@ -49,11 +47,8 @@
       color: var(--text-main);
       cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-    .top-controls button:hover {
-      border-color: var(--accent-color);
-    }
+    .top-controls button:hover { border-color: var(--accent-color); }
 
     /* العنوان والنص */
     h1 { font-size: 2.6rem; color: var(--accent-color); margin-bottom: 15px; font-weight: 900; }
@@ -70,12 +65,35 @@
       text-decoration: none;
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0, 240, 255, 0.25);
-      margin-bottom: 60px;
+      margin-bottom: 50px;
     }
     .subscribe-btn:hover { transform: scale(1.05); }
 
+    /* أزرار الأقسام الأربعة */
+    .filter-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .filter-btn {
+      padding: 10px 22px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: 2px solid var(--accent-color);
+      background: transparent;
+      color: var(--text-main);
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent-color);
+      color: #000;
+      box-shadow: 0 0 15px var(--accent-color);
+    }
+
     /* قسم الألعاب */
-    h2 { font-size: 2.2rem; margin-bottom: 35px; color: var(--accent-color); }
     .games-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -86,22 +104,38 @@
 
     .game-card {
       background: var(--card-bg);
-      backdrop-filter: blur(8px); /* تأثير ضبابي خلف البطاقة يزيد من راحة العين */
+      backdrop-filter: blur(8px);
       padding: 20px;
       border-radius: 20px;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
     }
+    
+    .game-card.hidden { display: none !important; }
+
     .game-card img {
       width: 100%;
       height: 340px;
       object-fit: cover;
       border-radius: 12px;
     }
-    .game-card h3 {
-      font-size: 1.5rem;
-      margin: 15px 0;
+    .game-card h3 { font-size: 1.5rem; margin: 15px 0; }
+    
+    /* شارات المنصات الملونة */
+    .platform-badge {
+      align-self: center;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
     }
 
     /* زر تحميل اللعبة */
@@ -116,7 +150,7 @@
       font-weight: bold;
       text-decoration: none;
       border-radius: 10px;
-      margin-top: 10px;
+      margin-top: auto;
     }
     .download-btn:hover {
       background: var(--accent-color);
@@ -140,32 +174,64 @@
     اشترك في قناتي
   </a>
 
-  <h2 id="games-title">🎮 ألعاب المشتركين</h2>
+  <!-- أزرار الأقسام الأربعة المطلوبة -->
+  <div class="filter-container">
+    <button class="filter-btn active" onclick="filterGames('all')" id="btn-all">كل الألعاب</button>
+    <button class="filter-btn" onclick="filterGames('pc')" id="btn-pc">PC</button>
+    <button class="filter-btn" onclick="filterGames('ps2')" id="btn-ps2">PS2</button>
+    <button class="filter-btn" onclick="filterGames('ps3')" id="btn-ps3">PS3</button>
+    <button class="filter-btn" onclick="filterGames('ps4')" id="btn-ps4">PS4</button>
+  </div>
 
   <div class="games-container">
-    <div class="game-card">
+    
+    <!-- لعبة Dragon Ball (منصة PS3) -->
+    <div class="game-card ps3">
+      <div class="platform-badge">PS3</div>
       <img src="Dragon-Ball-Raging-Blast-2-ps3.png" alt="Game">
       <h3>Dragon Ball Raging Blast 2</h3>
-      <a href="https://romsfun.com/download/dragon-ball-raging-blast-2-1-35119/2" class="download-btn" id="dl-btn-1" target="_blank">
+      <a href="https://romsfun.com/download/dragon-ball-raging-blast-2-1-35119/2" class="download-btn" target="_blank">
         تنزيل اللعبة
       </a>
     </div>
+
   </div>
 
   <script>
+    // سكربت التصفية الذكي للأقسام الأربعة
+    function filterGames(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(`btn-${category}`).classList.add('active');
+
+      const cards = document.querySelectorAll('.game-card');
+      cards.forEach(card => {
+        if (category === 'all') {
+          card.classList.remove('hidden');
+        } else if (card.classList.contains(category)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // سكربت اللغات والتوافق
     function setLang(lang) {
+      const dlButtons = document.querySelectorAll('.download-btn');
       if(lang === 'ar') {
         document.getElementById('title').innerText = "مرحبًا بكم في موقعي";
         document.getElementById('desc').innerText = "هنا تجد قناتي وألعابي المفضلة.";
         document.getElementById('sub-btn').innerText = "اشترك في قناتي";
-        document.getElementById('games-title').innerText = "🎮 ألعاب المشتركين";
-        document.getElementById('dl-btn-1').innerText = "تنزيل اللعبة";
+        document.getElementById('btn-all').innerText = "كل الألعاب";
+        dlButtons.forEach(btn => btn.innerText = "تنزيل اللعبة");
       } else {
         document.getElementById('title').innerText = "Welcome to my site";
         document.getElementById('desc').innerText = "Find my channel and favorite games here.";
         document.getElementById('sub-btn').innerText = "Subscribe Now";
-        document.getElementById('games-title').innerText = "🎮 Subscribers' Games";
-        document.getElementById('dl-btn-1').innerText = "Download Game";
+        document.getElementById('btn-all').innerText = "All Games";
+        dlButtons.forEach(btn => btn.innerText = "Download Game");
       }
     }
 
