@@ -52,7 +52,7 @@
     }
     .top-controls button:hover { border-color: var(--accent-color); }
 
-    /* العنوان والنص */
+    /* Title & Description */
     h1 { font-size: 2.6rem; color: var(--accent-color); margin-bottom: 15px; font-weight: 900; }
     p { font-size: 1.4rem; margin-bottom: 30px; color: var(--text-muted); }
 
@@ -95,7 +95,7 @@
       box-shadow: 0 0 15px var(--accent-color);
     }
 
-    /* شريط البحث المرتب */
+    /* شريط البحث */
     .search-container {
       width: 100%;
       max-width: 500px;
@@ -122,7 +122,7 @@
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
     }
 
-    /* قسم الألعاب */
+    /* حاوية الألعاب */
     .games-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -143,7 +143,6 @@
       flex-direction: column;
     }
     
-    /* كلاسات الإخفاء للبحث والأقسام */
     .game-card.hidden { display: none !important; }
 
     .game-card img {
@@ -213,14 +212,14 @@
     <button class="filter-btn" onclick="filterGames('ps4')" id="btn-ps4">PS4</button>
   </div>
 
-  <!-- شريط البحث المرتب الجديد -->
+  <!-- شريط البحث -->
   <div class="search-container">
     <input type="text" id="search-bar" class="search-input" placeholder="🔍 ابحث عن لعبتك المفضلة..." oninput="searchGames()">
   </div>
 
   <div class="games-container">
     
-    <!-- لعبة Dragon Ball (منصة PS3) -->
+    <!-- لعبة Dragon Ball الاولى (منصة PS3) -->
     <div class="game-card ps3">
       <div class="platform-badge">PS3</div>
       <img src="Dragon-Ball-Raging-Blast-2-ps3.png" alt="Game">
@@ -230,19 +229,28 @@
       </a>
     </div>
 
+    <!-- لعبة Dragon Ball Z Kakarot الجديدة (منصة PC) -->
+    <div class="game-card pc">
+      <div class="platform-badge">PC</div>
+      <!-- تأكد من تسمية الصورة المرفوعة على قيت هوب بنفس هذا الاسم تماماً -->
+      <img src="Dragon-Ball-Z-Kakarot-pc.png" alt="Game">
+      <h3 class="game-title">Dragon Ball Z: Kakarot</h3>
+      <a href="https://www.downloadcomputergames.net/p/redirect.html#https://up.downloadcomputergames.net/2020/12/dragon-ball-z-for-pc/Dragon-Ball-Z-Kakarot.zip" class="download-btn" target="_blank">
+        تنزيل اللعبة
+      </a>
+    </div>
+
   </div>
 
   <script>
     let currentCategory = 'all';
 
-    // سكربت التصفية للأقسام
     function filterGames(category) {
       currentCategory = category;
       const buttons = document.querySelectorAll('.filter-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${category}`).classList.add('active');
       
-      // تفريغ خانة البحث عند تغيير القسم لعدم حدوث تضارب
       document.getElementById('search-bar').value = '';
       
       const cards = document.querySelectorAll('.game-card');
@@ -255,7 +263,6 @@
       });
     }
 
-    // سكربت البحث الذكي المدمج مع الأقسام
     function searchGames() {
       const searchInput = document.getElementById('search-bar').value.toLowerCase();
       const cards = document.querySelectorAll('.game-card');
@@ -273,7 +280,6 @@
       });
     }
 
-    // سكربت اللغات
     function setLang(lang) {
       const dlButtons = document.querySelectorAll('.download-btn');
       const searchBar = document.getElementById('search-bar');
