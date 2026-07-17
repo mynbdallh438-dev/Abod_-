@@ -12,6 +12,7 @@
       --text-muted: #94a3b8;
       --accent-color: #00f0ff;
       --card-bg: rgba(30, 41, 59, 0.7);
+      --search-bg: rgba(15, 23, 42, 0.6);
     }
 
     .light-theme {
@@ -19,6 +20,7 @@
       --text-main: #0f172a;
       --text-muted: #475569;
       --card-bg: rgba(255, 255, 255, 0.9);
+      --search-bg: rgba(226, 232, 240, 0.6);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.4s ease, color 0.3s ease, transform 0.3s ease; }
@@ -69,11 +71,11 @@
     }
     .subscribe-btn:hover { transform: scale(1.05); }
 
-    /* أزرار الأقسام الأربعة */
+    /* أزرار الأقسام */
     .filter-container {
       display: flex;
       gap: 10px;
-      margin-bottom: 35px;
+      margin-bottom: 25px;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -91,6 +93,33 @@
       background: var(--accent-color);
       color: #000;
       box-shadow: 0 0 15px var(--accent-color);
+    }
+
+    /* شريط البحث المرتب */
+    .search-container {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 40px;
+      padding: 0 10px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 1.1rem;
+      font-family: 'Tajawal', sans-serif;
+      font-weight: bold;
+      background: var(--search-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      color: var(--text-main);
+      outline: none;
+      text-align: center;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .search-input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
     }
 
     /* قسم الألعاب */
@@ -114,6 +143,7 @@
       flex-direction: column;
     }
     
+    /* كلاسات الإخفاء للبحث والأقسام */
     .game-card.hidden { display: none !important; }
 
     .game-card img {
@@ -124,7 +154,7 @@
     }
     .game-card h3 { font-size: 1.5rem; margin: 15px 0; }
     
-    /* شارات المنصات الملونة */
+    /* شارات المنصات */
     .platform-badge {
       align-self: center;
       padding: 5px 15px;
@@ -174,7 +204,7 @@
     اشترك في قناتي
   </a>
 
-  <!-- أزرار الأقسام الأربعة المطلوبة -->
+  <!-- أزرار الأقسام -->
   <div class="filter-container">
     <button class="filter-btn active" onclick="filterGames('all')" id="btn-all">كل الألعاب</button>
     <button class="filter-btn" onclick="filterGames('pc')" id="btn-pc">PC</button>
@@ -183,13 +213,18 @@
     <button class="filter-btn" onclick="filterGames('ps4')" id="btn-ps4">PS4</button>
   </div>
 
+  <!-- شريط البحث المرتب الجديد -->
+  <div class="search-container">
+    <input type="text" id="search-bar" class="search-input" placeholder="🔍 ابحث عن لعبتك المفضلة..." oninput="searchGames()">
+  </div>
+
   <div class="games-container">
     
     <!-- لعبة Dragon Ball (منصة PS3) -->
     <div class="game-card ps3">
       <div class="platform-badge">PS3</div>
       <img src="Dragon-Ball-Raging-Blast-2-ps3.png" alt="Game">
-      <h3>Dragon Ball Raging Blast 2</h3>
+      <h3 class="game-title">Dragon Ball Raging Blast 2</h3>
       <a href="https://romsfun.com/download/dragon-ball-raging-blast-2-1-35119/2" class="download-btn" target="_blank">
         تنزيل اللعبة
       </a>
@@ -198,18 +233,21 @@
   </div>
 
   <script>
-    // سكربت التصفية الذكي للأقسام الأربعة
+    let currentCategory = 'all';
+
+    // سكربت التصفية للأقسام
     function filterGames(category) {
+      currentCategory = category;
       const buttons = document.querySelectorAll('.filter-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
-      
       document.getElementById(`btn-${category}`).classList.add('active');
-
+      
+      // تفريغ خانة البحث عند تغيير القسم لعدم حدوث تضارب
+      document.getElementById('search-bar').value = '';
+      
       const cards = document.querySelectorAll('.game-card');
       cards.forEach(card => {
-        if (category === 'all') {
-          card.classList.remove('hidden');
-        } else if (card.classList.contains(category)) {
+        if (category === 'all' || card.classList.contains(category)) {
           card.classList.remove('hidden');
         } else {
           card.classList.add('hidden');
@@ -217,20 +255,42 @@
       });
     }
 
-    // سكربت اللغات والتوافق
+    // سكربت البحث الذكي المدمج مع الأقسام
+    function searchGames() {
+      const searchInput = document.getElementById('search-bar').value.toLowerCase();
+      const cards = document.querySelectorAll('.game-card');
+
+      cards.forEach(card => {
+        const gameTitle = card.querySelector('.game-title').innerText.toLowerCase();
+        const matchesSearch = gameTitle.includes(searchInput);
+        const matchesCategory = (currentCategory === 'all' || card.classList.contains(currentCategory));
+
+        if (matchesSearch && matchesCategory) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // سكربت اللغات
     function setLang(lang) {
       const dlButtons = document.querySelectorAll('.download-btn');
+      const searchBar = document.getElementById('search-bar');
+      
       if(lang === 'ar') {
         document.getElementById('title').innerText = "مرحبًا بكم في موقعي";
         document.getElementById('desc').innerText = "هنا تجد قناتي وألعابي المفضلة.";
         document.getElementById('sub-btn').innerText = "اشترك في قناتي";
         document.getElementById('btn-all').innerText = "كل الألعاب";
+        searchBar.placeholder = "🔍 ابحث عن لعبتك المفضلة...";
         dlButtons.forEach(btn => btn.innerText = "تنزيل اللعبة");
       } else {
         document.getElementById('title').innerText = "Welcome to my site";
         document.getElementById('desc').innerText = "Find my channel and favorite games here.";
         document.getElementById('sub-btn').innerText = "Subscribe Now";
         document.getElementById('btn-all').innerText = "All Games";
+        searchBar.placeholder = "🔍 Search your favorite game...";
         dlButtons.forEach(btn => btn.innerText = "Download Game");
       }
     }
