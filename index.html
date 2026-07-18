@@ -151,8 +151,16 @@
       object-fit: cover;
       border-radius: 12px;
     }
-    .game-card h3 { font-size: 1.5rem; margin: 15px 0; }
+    .game-card h3 { font-size: 1.5rem; margin: 15px 0 5px 0; }
     
+    /* تصميم سطر مساحة اللعبة */
+    .game-size {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
     /* شارات المنصات */
     .platform-badge {
       align-self: center;
@@ -203,7 +211,6 @@
     <button onclick="toggleTheme()">🌓</button>
   </div>
 
-  <!-- تم تعديل اسم الموقع هنا -->
   <h1 id="title">موقع عبد الله_Abod الشخصي</h1>
   <p id="desc">هنا تجد قناتي وألعابي المفضلة.</p>
   
@@ -233,6 +240,7 @@
       <div class="platform-badge">PS3</div>
       <img src="Dragon-Ball-Raging-Blast-2-ps3.png" alt="Game">
       <h3 class="game-title">Dragon Ball Raging Blast 2</h3>
+      <div class="game-size"><span class="size-label">المساحة:</span> 6.39 GB</div>
       <a href="https://romsfun.com/download/dragon-ball-raging-blast-2-1-35119/2" class="download-btn" target="_blank">
         تنزيل اللعبة
       </a>
@@ -243,6 +251,7 @@
       <div class="platform-badge">PC</div>
       <img src="Dragon-Ball-Z-Kakarot-pc.png" alt="Game">
       <h3 class="game-title">Dragon Ball Z: Kakarot</h3>
+      <div class="game-size"><span class="size-label">المساحة:</span> 30.60 GB</div>
       <a href="https://www.downloadcomputergames.net/p/redirect.html#https://up.downloadcomputergames.net/2020/12/dragon-ball-z-for-pc/Dragon-Ball-Z-Kakarot.zip" class="download-btn" target="_blank">
         تنزيل اللعبة
       </a>
@@ -253,6 +262,7 @@
       <div class="platform-badge">PSP</div>
       <img src="fifa-soccer-14-psp.png" alt="Game">
       <h3 class="game-title">FIFA Soccer 14</h3>
+      <div class="game-size"><span class="size-label">المساحة:</span> 1.13 GB</div>
       <a href="https://romsfun.com/download/fifa-soccer-14-167736/10" class="download-btn" target="_blank">
         تنزيل اللعبة
       </a>
@@ -301,6 +311,7 @@
     function setLang(lang) {
       const dlButtons = document.querySelectorAll('.download-btn');
       const searchBar = document.getElementById('search-bar');
+      const sizeLabels = document.querySelectorAll('.size-label');
       
       if(lang === 'ar') {
         document.getElementById('title').innerText = "موقع عبد الله_Abod الشخصي";
@@ -309,6 +320,7 @@
         document.getElementById('btn-all').innerText = "كل الألعاب";
         searchBar.placeholder = "🔍 ابحث عن لعبتك المفضلة...";
         dlButtons.forEach(btn => btn.innerText = "تنزيل اللعبة");
+        sizeLabels.forEach(label => label.innerText = "المساحة:");
       } else {
         document.getElementById('title').innerText = "Abdullah_Abod Personal Site";
         document.getElementById('desc').innerText = "Find my channel and favorite games here.";
@@ -316,6 +328,7 @@
         document.getElementById('btn-all').innerText = "All Games";
         searchBar.placeholder = "🔍 Search your favorite game...";
         dlButtons.forEach(btn => btn.innerText = "Download Game");
+        sizeLabels.forEach(label => label.innerText = "Size:");
       }
     }
 
