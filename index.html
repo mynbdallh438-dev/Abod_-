@@ -141,7 +141,6 @@
       max-width: 850px;
     }
 
-    /* بالنسبة للهواتف يفضل سطر واحد لتظل البطاقات واضحة الكلمات وصورها كبيرة */
     @media (max-width: 650px) {
       .games-container { grid-template-columns: 1fr; }
     }
@@ -279,7 +278,7 @@
     <input type="text" id="search-bar" class="search-input" placeholder="🔍 ابحث عن لعبتك المفضلة..." oninput="searchGames()">
   </div>
 
-  <!-- حاوية ألعابك الثلاث الأساسية فقط مرتبة لعبتين في الطابق -->
+  <!-- حاوية الألعاب -->
   <div class="games-container" id="games-wrapper">
     
     <!-- 1. Dragon Ball (PS3) -->
@@ -309,9 +308,17 @@
       <a href="https://romsfun.com/download/fifa-soccer-14-167736/10" class="download-btn" target="_blank">تنزيل اللعبة</a>
     </div>
 
+    <!-- 4. Resident Evil 4 Remake (PC) -->
+    <div class="game-card pc">
+      <div class="platform-badge">PC</div>
+      <img src="Resident-Evil-4-Remake-pc.png" alt="Game">
+      <h3 class="game-title">Resident Evil 4 Remake</h3>
+      <div class="game-size"><span class="size-label">المساحة:</span> 56.50 GB</div>
+      <a href="https://www.wifi4games.com/pc_games/Resident_Evil_4:_Remake_%E2%80%93_Deluxe_Edition.html" class="download-btn" target="_blank">تنزيل اللعبة</a>
+    </div>
+
   </div>
 
-  <!-- السهام ونظام الـ 10 ألعاب جاهز للعمل تلقائياً مستقبلاً -->
   <div class="pagination-container" id="pagination-controls">
     <button class="page-btn" id="prev-btn" onclick="changePage(-1)">
       <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
